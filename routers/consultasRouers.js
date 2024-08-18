@@ -13,11 +13,13 @@ router.post('/consultas/add', (req, res) => {
 
 // Put
 router.put('/consulta/:id', (req, res) => {
+    const { id } = req.params
     res.send(`Atualizando consulta id: ${id}...`)
 })
 
 // Delete
 router.delete('/consulta/delete/:id', (req, res) => {
+    const { id } = req.params
     res.send(`Deletando consulta id: ${id}...`)
 })
 
