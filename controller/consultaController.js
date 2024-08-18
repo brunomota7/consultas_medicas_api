@@ -1,18 +1,19 @@
+const consultaModel = require('../models/consultaModel')
 class ConsultaController {
     buscarConsultas() {
-        return 'Buscando consultas...'
+        return consultaModel.listar()
     }
 
-    criarConsulta() {
-        return 'Criando consulta...' 
+    criarConsulta(novoAtendimento) {
+        return consultaModel.criarConsulta(novoAtendimento) 
     }
 
-    atualizandoConsulta(id) {
-        return `Atualizando consulta id: ${id}...`
+    atualizandoConsulta(consultaAtualizada, id) {
+        return consultaModel.atualizarConsulta(consultaAtualizada, id)
     }
 
     deletaConsulta(id) {
-        return `Deletando consulta id: ${id}...`
+        return consultaModel.deletarConsulta(id)
     }
 }
 

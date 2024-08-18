@@ -5,9 +5,8 @@ const router = require('./routers/app')
 const conexao = require('./conexoes/conexao')
 const tabelas = require('./conexoes/tabelas')
 
-tabelas.init(conexao)
-router(app)
-app.use(router)
+router(app, express) // Configurando as rotas principais
+tabelas.init(conexao) // Inicializando a conexão e a tabela
 
 app.listen(port, (error) => {
     if (error) {

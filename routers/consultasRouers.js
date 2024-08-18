@@ -2,30 +2,32 @@ const { Router } = require('express')
 const router = Router()
 const consultaController = require('../controller/consultaController')
 
-// Get
-router.get('/consultas', (req, res) => {
-    const resposta = consultaController.buscarConsultas()
-    res.send(resposta)
+router.get('/consultas', (req, res) => { // Get
+    consultaController.buscarConsultas()
+        .then((consultas) => res.status(200).json(consultas))
+        .catch((error) => res.status(400).json({ error: error.message }))
 })
 
-// Post
-router.post('/consultas/add', (req, res) => {
-    const resposta = consultaController.criarConsulta()
-    res.send(resposta)
+router.post('/consultas/add', (req, res) => { // Post
+    const novoAtendimento = req.body
+    consultaController.criarConsulta(novoAtendimento)
+        .then((atendimento) => res.status(201).json(atendimento))
+        .catch((error) => res.status(400).json({ error: error.message }))
 })
 
-// Put
-router.put('/consulta/:id', (req, res) => {
+router.put('/consultas/:id', (req, res) => { // Put
     const { id } = req.params
-    const resposta = consultaController.atualizandoConsulta(id)
-    res.send(resposta)
+    const atendimentoAtualizado = req.body
+    consultaController.atualizandoConsulta(atendimentoAtualizado, id)
+        .then((resultConsultaAtualizado) => res.status(200).json(resultConsultaAtualizado))
+        .catch((error) => res.status(400).json({ error: error.message }))
 })
 
-// Delete
-router.delete('/consulta/delete/:id', (req, res) => {
+router.delete('/consultas/delete/:id', (req, res) => { // Delete
     const { id } = req.params
-    const resposta = consultaController.deletaConsulta(id)
-    res.send(resposta)
+    consultaController.deletaConsulta(id)
+        .then((resultConsultaDeletada) => res.status(200).json(resultConsultaDeletada))
+        .catch((error) => res.status(400).json({ error: error.message }))
 })
 
 module.exports = router;
