@@ -19,14 +19,13 @@ class AtendimentoModel {
         return new Promise((resolve, reject) => {
             conexao.query(sql, consulta, (error, res) => {
                 if (error) {
-                    console.log(`Erro ao criar atendimento: ${error}`)
+                    console.log(`Erro ao criar consulta: ${error}`)
                     reject(error)
                 }
                 resolve(res)
             })
         })
     }
-
     
     atualizarConsulta(consultaAtualizada, id) {
         const sql = `UPDATE consultas SET ? WHERE id = ${id}`
